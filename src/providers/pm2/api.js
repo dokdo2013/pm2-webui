@@ -113,8 +113,10 @@ function restartApp(process) {
   });
 }
 
-async function pullApp(process) {
-  return await git.pull(process.pm2_env.pm_cwd);
+async function pullApp() {
+  const res = await git.pull();
+  console.log("[GIT PULL]", res);
+  return res;
 }
 
 module.exports = {
@@ -123,4 +125,5 @@ module.exports = {
   reloadApp,
   stopApp,
   restartApp,
+  pullApp,
 };

@@ -7,6 +7,7 @@ const {
   reloadApp,
   restartApp,
   stopApp,
+  pullApp,
 } = require("../providers/pm2/api");
 const { validateAdminUser } = require("../services/admin.service");
 const { readLogsReverse } = require("../utils/read-logs.util");
@@ -175,14 +176,9 @@ router.post("/api/apps/:appName/stop", isAuthenticated, async (ctx) => {
 router.post("/api/apps/:appName/pull", isAuthenticated, async (ctx) => {
   try {
     let { appName } = ctx.params;
-    let apps = await pullApp(appName);
-    if (Array.isArray(apps) && apps.length > 0) {
-      return (ctx.body = {
-        success: true,
-      });
-    }
+    await pullApp(appName);
     return (ctx.body = {
-      success: false,
+      success: true,
     });
   } catch (err) {
     return (ctx.body = {
