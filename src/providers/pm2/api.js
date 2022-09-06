@@ -1,6 +1,5 @@
 const pm2 = require("pm2");
 const simpleGit = require("simple-git");
-const git = simpleGit();
 const { bytesToSize, timeSince } = require("./ux.helper");
 
 function listApps() {
@@ -118,7 +117,10 @@ async function pullApp(pm2_app_name) {
   const appData = await describeApp(pm2_app_name);
   const pm2_app_path = appData.pm2_env_cwd;
   console.log("app path : ", pm2_app_path);
-  const res = await git.pull(pm2_app_path);
+
+  // set git repo
+  const git = simpleGit(pm2_app_path);
+  const res = await git.pull();
   console.log("[GIT PULL]", res);
   return res;
 }
