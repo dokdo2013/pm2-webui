@@ -1,6 +1,8 @@
 ### PM2 WebUI
 Opensource Alternative to PM2 Plus
 
+> Git Pull feature is available in this forked version
+
 ##### FEATURES
 - Secure Login :white_check_mark:
 - App Management :white_check_mark:
