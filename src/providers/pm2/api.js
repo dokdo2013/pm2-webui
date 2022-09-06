@@ -21,6 +21,7 @@ function listApps() {
             memory: bytesToSize(app.monit.memory),
             uptime: timeSince(app.pm2_env.pm_uptime),
             pm_id: app.pm_id,
+            git_branch: app.pm2_env.pm_cwd,
           };
         });
         resolve(apps);
