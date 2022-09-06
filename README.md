@@ -8,6 +8,7 @@ Opensource Alternative to PM2 Plus
 - Responsive UI :white_check_mark:
 - Manual and Auto(Github webhooks) Deployment
 - Environment Management
+- **GIT PULL AVAILABLE**
 
 ##### USAGE
 ```
