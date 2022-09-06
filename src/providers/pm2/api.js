@@ -1,6 +1,7 @@
 const pm2 = require("pm2");
 const simpleGit = require("simple-git");
 const { bytesToSize, timeSince } = require("./ux.helper");
+const { getCurrentGitBranch } = require("../../utils/git.util");
 
 function listApps() {
   return new Promise((resolve, reject) => {
@@ -21,7 +22,7 @@ function listApps() {
             memory: bytesToSize(app.monit.memory),
             uptime: timeSince(app.pm2_env.pm_uptime),
             pm_id: app.pm_id,
-            git_branch: app.pm2_env.pm_cwd,
+            git_branch: getCurrentGitBranch(app.pm2_env.pm_cwd),
           };
         });
         resolve(apps);
