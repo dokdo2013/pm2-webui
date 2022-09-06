@@ -113,8 +113,11 @@ function restartApp(process) {
   });
 }
 
-async function pullApp() {
-  const res = await git.pull();
+async function pullApp(pm2_app_name) {
+  // get pm2 app's path
+  const appData = await describeApp(pm2_app_name);
+  const pm2_app_path = appData.pm2_env_cwd;
+  const res = await git.pull(pm2_app_path);
   console.log("[GIT PULL]", res);
   return res;
 }
