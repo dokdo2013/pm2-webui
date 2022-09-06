@@ -53,8 +53,17 @@ router.post("/login", loginRateLimiter, checkAuthentication, async (ctx) => {
 
 router.get("/apps", isAuthenticated, async (ctx) => {
   const apps = await listApps();
+  // for loop, to get current git branch
+  const dashboardApps = [];
+  for (let i = 0; i < apps.length; i++) {
+    const gitBranch = await getCurrentGitBranch(apps[i].pm2_env_cwd);
+    dashboardApps.push({
+      ...apps[i],
+      git_branch: gitBranch,
+    });
+  }
   return await ctx.render("apps/dashboard", {
-    apps,
+    apps: dashboardApps,
   });
 });
 
